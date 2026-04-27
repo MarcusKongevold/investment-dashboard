@@ -1,0 +1,507 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-black-3);
+  min-height: 100vh;
+}
+
+/* ── HEADER ── */
+.page-header {
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-black-8);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.page-header__inner {
+  max-width: 1510px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-large);
+  height: 4.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.page-header__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-small);
+}
+
+.page-header__logo-divider {
+  width: 1px;
+  height: 3rem;
+  background: var(--color-black-20);
+}
+
+.page-header__logo-label {
+  font-size: var(--font-size-medium);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-black);
+  line-height: 1;
+  padding-left: var(--spacing-x-small);
+}
+
+/* ── NAV TABS ── */
+.page-nav {
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-black-8);
+  padding: 0 var(--spacing-large);
+  max-width: 1510px;
+  margin: 0 auto;
+}
+
+.page-nav .dnb-tabs__tabs {
+  padding: 0;
+  max-width: 1510px;
+  margin: 0 auto;
+}
+
+/* ── ACCOUNT FILTER ── */
+.account-filter {
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-black-8);
+  padding: var(--spacing-small) var(--spacing-large);
+}
+
+.account-filter__inner {
+  max-width: 1510px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-medium);
+  flex-wrap: wrap;
+}
+
+.account-filter__tags {
+  display: flex;
+  gap: var(--spacing-x-small);
+  flex-wrap: wrap;
+  flex: 1;
+}
+
+/* ── PAGE CONTENT ── */
+.page-content {
+  max-width: 1510px;
+  margin: 0 auto;
+  padding: var(--spacing-large);
+  display: grid;
+  grid-template-columns: 1fr 381px;
+  grid-template-rows: auto auto 1fr;
+  gap: var(--spacing-large);
+}
+
+.page-content__summary {
+  grid-column: 1 / -1;
+}
+
+.page-content__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-large);
+  min-width: 0;
+}
+
+.page-content__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-large);
+  min-width: 0;
+}
+
+/* ── OVERVIEW GRID ── */
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 440px;
+  gap: var(--spacing-large);
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.summary-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-small);
+}
+
+/* On small screens: horizontal scroll with fixed-width cards */
+@media (max-width: 768px) {
+  .summary-cards {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    gap: var(--spacing-small);
+    /* allow scroll past container edges */
+    margin-left: calc(-1 * var(--spacing-large));
+    margin-right: calc(-1 * var(--spacing-large));
+    padding-left: var(--spacing-large);
+    padding-right: var(--spacing-large);
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .summary-cards::-webkit-scrollbar { display: none; }
+  .summary-cards > * {
+    flex: 0 0 260px;
+  }
+}
+
+.summary-card__label {
+  font-size: var(--font-size-small);
+  color: var(--color-black-55);
+  margin-bottom: var(--spacing-x-small);
+}
+
+.summary-card__value {
+  font-size: 2rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-black);
+  line-height: 1.2;
+}
+
+.summary-card__change {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  margin-top: var(--spacing-xx-small);
+}
+
+.summary-card__change--positive {
+  color: var(--color-success-green);
+  background: #e8f5e9;
+}
+
+.summary-card__change--negative {
+  color: var(--color-fire-red);
+  background: #fce4e1;
+}
+
+.summary-card__link {
+  font-size: var(--font-size-small);
+  margin-top: var(--spacing-x-small);
+}
+
+/* ── PERIOD STATS ROW ── */
+.period-stats {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0;
+}
+
+.period-stat {
+  padding: var(--spacing-small) var(--spacing-medium);
+  border-right: 1px solid var(--color-black-8);
+  text-align: left;
+}
+
+.period-stat:first-child {
+  padding-left: var(--spacing-large);
+}
+
+.period-stat:last-child {
+  border-right: none;
+  padding-right: var(--spacing-large);
+}
+
+.period-stat__label {
+  font-size: var(--font-size-small);
+  color: var(--color-black-55);
+  margin-bottom: 0.25rem;
+}
+
+.period-stat__value {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+}
+
+.period-stat__value--positive {
+  color: var(--color-success-green);
+  background: #e8f5e9;
+}
+
+.period-stat__value--negative {
+  color: var(--color-fire-red);
+  background: #fce4e1;
+}
+
+/* ── ALLOCATION BAR ── */
+.allocation-bar {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  overflow: hidden;
+  gap: 4px;
+}
+
+.allocation-bar__segment {
+  border-radius: 4px;
+  height: 8px;
+}
+
+.allocation-legend {
+  display: flex;
+  gap: var(--spacing-medium);
+  flex-wrap: wrap;
+  margin-bottom: var(--spacing-x-small);
+}
+
+.allocation-legend__item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-x-small);
+  font-size: var(--font-size-small);
+  color: var(--color-black-55);
+}
+
+.allocation-legend__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ── BIGGEST MOVERS ── */
+.movers-table .dnb-table__th {
+  font-size: var(--font-size-small);
+  color: var(--color-black-55);
+  font-weight: var(--font-weight-default);
+}
+
+/* ── WATCHLIST ── */
+.watchlist-table .dnb-table__th {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* ── CHANGE BADGE ── */
+.change-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+.change-badge--positive {
+  color: #007b5e;
+  background: #ebf4f2;
+}
+
+.change-badge--negative {
+  color: var(--color-fire-red);
+  background: #fdecea;
+}
+
+/* ── MARKET DATA ── */
+.market-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-x-small) 0;
+  border-bottom: 1px solid var(--color-black-8);
+}
+
+.market-row:last-child {
+  border-bottom: none;
+}
+
+.market-row__name {
+  font-size: var(--font-size-small);
+  color: var(--color-black-55);
+}
+
+.market-row__value {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xx-small);
+}
+
+/* ── NEWS LIST ── */
+.news-item {
+  padding: var(--spacing-x-small) 0;
+  border-bottom: 1px solid var(--color-black-8);
+  cursor: pointer;
+}
+
+.news-item:last-child {
+  border-bottom: none;
+}
+
+.news-item__meta {
+  font-size: var(--font-size-x-small);
+  color: var(--color-black-55);
+  margin-bottom: 0.125rem;
+}
+
+.news-item__title {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-black);
+  margin-bottom: 0.125rem;
+  line-height: 1.4;
+}
+
+.news-item__tickers {
+  font-size: var(--font-size-x-small);
+  color: var(--color-black-55);
+}
+
+/* ── PROMO CARD ── */
+.promo-card {
+  position: relative;
+  border-radius: var(--spacing-small);
+  overflow: hidden;
+  height: 160px;
+  background: var(--color-sea-green);
+}
+
+.promo-card__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.55));
+  padding: var(--spacing-small) var(--spacing-medium);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.promo-card__label {
+  color: var(--color-white);
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ── AVATAR BUTTON ── */
+.avatar-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-x-small);
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--spacing-xx-small);
+  background: none;
+  border: none;
+  transition: background 0.15s;
+}
+
+.avatar-btn:hover {
+  background: var(--color-black-3);
+}
+
+.avatar {
+  width: 2rem;
+  height: 2rem;
+  background: var(--color-ocean-green);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white);
+  font-size: 0.8rem;
+  font-weight: var(--font-weight-medium);
+  position: relative;
+}
+
+.avatar__badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  background: var(--color-fire-red);
+  color: var(--color-white);
+  font-size: 0.55rem;
+  font-weight: 700;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid var(--color-white);
+}
+
+/* ── CHART CONTROLS ── */
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: var(--spacing-medium) var(--spacing-medium) 0;
+}
+
+.chart-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.chart-detail__label {
+  font-size: var(--font-size-small);
+  color: var(--color-black-55);
+}
+
+.chart-detail__value {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ── CORPORATE EVENTS ── */
+.event-item {
+  padding: var(--spacing-x-small) 0;
+  border-bottom: 1px solid var(--color-black-8);
+  cursor: pointer;
+}
+
+.event-item:last-child {
+  border-bottom: none;
+}
+
+.event-item__date {
+  font-size: var(--font-size-x-small);
+  color: var(--color-black-55);
+  margin-bottom: 0.125rem;
+}
+
+.event-item__company {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-black);
+}
+
+.event-item__title {
+  font-size: var(--font-size-small);
+  color: var(--color-black-55);
+}
+
+/* ── ADVANCED INVESTMENTS ── */
+.holdings-list .dnb-list__item__footer-separator {
+  display: none;
+}
