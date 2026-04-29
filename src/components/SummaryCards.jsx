@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Card, Anchor, NumberFormat, Dialog, Button, List, P } from '@dnb/eufemia'
+import { Card, Anchor, NumberFormat, Dialog, Button, List, P, TermDefinition } from '@dnb/eufemia'
 import { information_circled_medium } from '@dnb/eufemia/icons'
 
 const ACCOUNT_VALUES = {
@@ -91,17 +91,17 @@ export default function SummaryCards({ selectedAccount = 'Alle kontoer', include
     : askAccount ? askAccount.tilgjengelig : 0
 
   const cards = [
-    { label: 'Egenkapital', value: ACCOUNT_VALUES['Alle kontoer'].egenkapital },
-    { label: 'Markedsverdi', value: liveMarkedsverdi, change: liveChange, changeAmount: liveChangeAmount, changeLabel: 'i dag' },
-    { label: 'Ikke investert', value: ikkeInvertert, action: ikkeInvertert > 0 ? { label: 'Overfør', href: '#' } : undefined },
+    { id: 'Egenkapital', label: <TermDefinition content="Verdien av dine investeringer fratrukket gjeld – det du faktisk eier.">Egenkapital</TermDefinition>, value: ACCOUNT_VALUES['Alle kontoer'].egenkapital },
+    { id: 'Markedsverdi', label: <TermDefinition content="Den totale verdien av dine verdipapirer basert på gjeldende markedskurs.">Markedsverdi</TermDefinition>, value: liveMarkedsverdi, change: liveChange, changeAmount: liveChangeAmount, changeLabel: 'i dag' },
+    { id: 'Ikke investert', label: 'Ikke investert', value: ikkeInvertert, action: ikkeInvertert > 0 ? { label: 'Overfør', href: '#' } : undefined },
   ]
 
   return (
     <div className="summary-cards">
-      {cards.map(({ label, value, change, changeAmount, changeLabel, action }) => (
-        <Card key={label} stack style={{ position: 'relative', padding: '0.375rem var(--spacing-medium) var(--spacing-small)', display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: 'var(--spacing-medium)' }}>
+      {cards.map(({ id, label, value, change, changeAmount, changeLabel, action }) => (
+        <Card key={id} stack style={{ position: 'relative', padding: '0.375rem var(--spacing-medium) var(--spacing-small)', display: 'flex', flexDirection: 'row', alignItems: 'flex-start', gap: 'var(--spacing-medium)' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
-            {label === 'Ikke investert' && <IkkeInvertertHelpDialog />}
+            {id === 'Ikke investert' && <IkkeInvertertHelpDialog />}
             <p className="summary-card__label" style={{ marginBottom: 0, fontSize: 'var(--font-size-basis)' }}>{label}</p>
             <p className="summary-card__value" style={{ fontSize: '1.375rem', marginBottom: 0, lineHeight: 1.3 }}>
               <NumberFormat.Currency value={value} />

@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import { Card, Button, Tabs, NumberFormat, Switch, Dropdown, List, Anchor } from '@dnb/eufemia'
+import { Card, Button, Tabs, NumberFormat, Switch, Dropdown, List, Anchor, TermDefinition } from '@dnb/eufemia'
 import { information_circled_medium } from '@dnb/eufemia/icons'
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -116,15 +116,18 @@ function LiveStatsRow({ accountData }) {
 
   const cards = [
     {
-      label: 'Egenkapital (Live)',
+      id: 'Egenkapital',
+      label: <TermDefinition content="Verdien av dine investeringer fratrukket gjeld – det du faktisk eier.">Egenkapital (Live)</TermDefinition>,
       content: <NumberFormat.Currency value={accountData.egenkapital} />,
     },
     {
-      label: 'Markedsverdi (Live)',
+      id: 'Markedsverdi',
+      label: <TermDefinition content="Den totale verdien av dine verdipapirer basert på gjeldende markedskurs.">Markedsverdi (Live)</TermDefinition>,
       content: <NumberFormat.Currency value={accountData.markedsverdi} />,
     },
     {
-      label: 'Utvikling i dag (Live)',
+      id: 'Utvikling',
+      label: <TermDefinition content="Endringen i porteføljens verdi siden børsåpning i dag, vist i kroner og prosent.">Utvikling i dag (Live)</TermDefinition>,
       content: (
         <span className={`change-badge change-badge--${positive ? 'positive' : 'negative'}`}>
           {positive ? '+ ' : '- '}<NumberFormat.Currency value={Math.abs(todayAmount)} />
@@ -136,8 +139,8 @@ function LiveStatsRow({ accountData }) {
 
   return (
     <div className="summary-cards">
-      {cards.map(({ label, content }) => (
-        <Card key={label} stack style={{ position: 'relative', padding: '0.375rem var(--spacing-medium) var(--spacing-small)' }}>
+      {cards.map(({ id, label, content }) => (
+        <Card key={id} stack style={{ position: 'relative', padding: '0.375rem var(--spacing-medium) var(--spacing-small)' }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', flex: 1 }}>
             <p className="summary-card__label" style={{ marginBottom: 0, fontSize: 'var(--font-size-basis)' }}>{label}</p>
             <p className="summary-card__value" style={{ fontSize: '1.375rem', marginBottom: 0, lineHeight: 1.3 }}>{content}</p>
@@ -177,7 +180,7 @@ function ChartCard({ accountData }) {
     : `Siste ${PERIODS.find(p => p.key === period)?.label ?? ''}`
 
   return (
-    <Card stack style={{ overflow: 'hidden' }}>
+    <Card stack>
       {/* Inner tabs */}
       <div style={{ paddingTop: 'var(--spacing-x-small)', borderBottom: '1px solid var(--color-black-8)' }}>
         <Tabs
@@ -237,9 +240,9 @@ function ChartCard({ accountData }) {
       </div>
 
       {/* Chart */}
-      <div style={{ width: '100%', height: '220px' }}>
+      <div style={{ margin: '0 calc(-1 * var(--spacing-medium))', height: '220px' }}>
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={chartData} margin={{ top: 4, right: 48, left: 0, bottom: 0 }}>
+          <AreaChart data={chartData} margin={{ top: 4, right: 0, left: 12, bottom: 0 }}>
             <defs>
               <linearGradient id="v2ChartGradient" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0%" stopColor={positive ? '#ebf4f2' : '#fdecea'} stopOpacity={1} />
@@ -339,17 +342,17 @@ function StatCardsRow({ accountData }) {
   }
 
   const stats = [
-    { label: 'Avkastning i dag',     ...computeToday() },
-    { label: 'Avkastning siste uke', ...computeStat('1W') },
-    { label: 'Avkastning i år',      ...computeStat('YTD') },
+    { id: 'i-dag',      label: <TermDefinition content="Endringen i porteføljens verdi siden børsåpning i dag, vist i kroner og prosent.">Avkastning i dag</TermDefinition>,     ...computeToday() },
+    { id: 'siste-uke',  label: 'Avkastning siste uke', ...computeStat('1W') },
+    { id: 'i-aar',      label: 'Avkastning i år',      ...computeStat('YTD') },
   ]
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 'var(--spacing-small)' }}>
-      {stats.map(({ label, pct, amount }) => {
+    <div className="stat-cards-row">
+      {stats.map(({ id, label, pct, amount }) => {
         const positive = amount >= 0
         return (
-          <Card key={label} stack>
+          <Card key={id} stack>
             <div style={{ fontSize: 'var(--font-size-small)', color: 'var(--color-black-55)', marginBottom: 'var(--spacing-x-small)' }}>{label}</div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--spacing-x-small)', flexWrap: 'wrap' }}>
               <span style={{ fontWeight: 'var(--font-weight-medium)', color: positive ? '#007272' : 'var(--color-fire-red)' }}>
@@ -375,8 +378,10 @@ function OversiktCard({ accountData }) {
   ]
 
   return (
-    <Card stack>
-      <List.Container>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-x-small)' }}>
+      <p style={{ fontWeight: 'var(--font-weight-medium)', fontSize: 'var(--font-size-lead)', margin: 0 }}>Tilgjengelig for handel</p>
+      <Card stack>
+        <List.Container>
           {items.map(({ label, value }) => (
             <List.Item.Basic key={label} title={label}>
               <List.Cell.End>
@@ -400,6 +405,7 @@ function OversiktCard({ accountData }) {
           </List.Item.Basic>
         </List.Container>
     </Card>
+    </div>
   )
 }
 
@@ -418,7 +424,7 @@ function FilterBar({ selectedAccount, onAccountChange, includePensions, onInclud
 
   return (
     <div style={{ background: 'var(--color-white)', borderBottom: '1px solid var(--color-black-8)' }}>
-      <div style={{ maxWidth: '1510px', margin: '0 auto', padding: 'var(--spacing-small) var(--spacing-large)', display: 'flex', alignItems: 'center', gap: 'var(--spacing-medium)' }}>
+      <div className="v2-filter-bar-inner">
         <Dropdown
           variant="tertiary"
           size="small"
@@ -463,19 +469,25 @@ export default function OverviewV2({ onStockClick, selectedAccount, onAccountCha
         includePensions={includePensions}
         onIncludePensionsChange={onIncludePensionsChange}
       />
-      <div style={{ maxWidth: '1510px', margin: '0 auto', padding: 'var(--spacing-large)', display: 'flex', flexDirection: 'column', gap: 'var(--spacing-large)' }}>
-        <LiveStatsRow accountData={accountData} />
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 440px', gap: 'var(--spacing-large)', alignItems: 'start' }}>
+      <div className="v2-page-content">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-x-small)' }}>
+          <p style={{ fontWeight: 'var(--font-weight-medium)', fontSize: 'var(--font-size-lead)', margin: 0 }}>Utvikling i dag</p>
+          <LiveStatsRow accountData={accountData} />
+        </div>
+        <div className="overview-grid">
           {/* Left column */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-large)', minWidth: 0 }}>
-            <ChartCard accountData={accountData} />
-            <StatCardsRow accountData={accountData} />
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-x-small)' }}>
+              <p style={{ fontWeight: 'var(--font-weight-medium)', fontSize: 'var(--font-size-lead)', margin: 0 }}>Historisk utvikling</p>
+              <ChartCard accountData={accountData} />
+            </div>
+            <div className="v2-oversikt-mobile"><OversiktCard accountData={accountData} /></div>
             <Watchlist onStockClick={onStockClick} />
           </div>
 
           {/* Right column */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-large)', minWidth: 0 }}>
-            <OversiktCard accountData={accountData} />
+            <div className="v2-oversikt-desktop"><OversiktCard accountData={accountData} /></div>
             <NewsPanel />
           </div>
         </div>

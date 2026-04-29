@@ -59,6 +59,7 @@ export default function HeaderSearch({ onStockClick }) {
     <>
       <button
         aria-label="Søk"
+        className="header-search-btn"
         onClick={() => setOpen(true)}
         style={{
           display: 'flex', alignItems: 'center', gap: '8px',
@@ -71,8 +72,8 @@ export default function HeaderSearch({ onStockClick }) {
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
         </svg>
-        Søk etter aksjer…
-        <span style={{ marginLeft: '8px', fontSize: '11px', color: 'var(--color-black-35)', background: 'var(--color-black-8)', borderRadius: '4px', padding: '1px 5px', letterSpacing: '0.02em' }}>⌘K</span>
+        <span className="header-search-text">Søk etter aksjer…</span>
+        <span className="header-search-shortcut" style={{ marginLeft: '8px', fontSize: '11px', color: 'var(--color-black-35)', background: 'var(--color-black-8)', borderRadius: '4px', padding: '1px 5px', letterSpacing: '0.02em' }}>⌘K</span>
       </button>
 
       <Dialog

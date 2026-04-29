@@ -321,6 +321,7 @@ export default function StockDetail({ stock, onBack }) {
           {/* Ordredybde */}
           <Card stack>
             <H3 size="medium">Ordredybde</H3>
+            <Table.ScrollView>
             <Table size="small">
               <thead>
                 <Tr>
@@ -351,12 +352,13 @@ export default function StockDetail({ stock, onBack }) {
                 ))}
               </tbody>
             </Table>
+            </Table.ScrollView>
           </Card>
 
           {/* Siste handler */}
           <Card stack>
             <H3 size="medium">Siste handler</H3>
-            <div style={{ overflowX: 'auto' }}>
+            <Table.ScrollView>
             <Table size="small" style={{ width: '100%', tableLayout: 'fixed', minWidth: '320px' }}>
               <thead>
                 <Tr>
@@ -379,7 +381,7 @@ export default function StockDetail({ stock, onBack }) {
                 ))}
               </tbody>
             </Table>
-            </div>
+            </Table.ScrollView>
           </Card>
 
 

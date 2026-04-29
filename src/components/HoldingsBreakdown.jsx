@@ -4,7 +4,8 @@ import { List, NumberFormat, Table, Tr, Th, Td, Lead } from '@dnb/eufemia'
 function StocksTable({ holdings, onStockClick }) {
   return (
     <div style={{ borderRadius: '1.5rem', overflow: 'hidden', background: 'var(--color-white)', margin: '0 var(--spacing-x-small) var(--spacing-x-small)' }}>
-      <Table size="medium" style={{ width: '100%' }}>
+      <Table.ScrollView>
+      <Table size="medium" style={{ width: '100%', minWidth: '540px' }}>
         <caption className="dnb-sr-only">Beholdning</caption>
         <thead>
           <Tr noWrap>
@@ -44,6 +45,7 @@ function StocksTable({ holdings, onStockClick }) {
           })}
         </tbody>
       </Table>
+      </Table.ScrollView>
     </div>
   )
 }

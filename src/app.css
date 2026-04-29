@@ -115,6 +115,26 @@ body {
   min-width: 0;
 }
 
+/* ── OVERVIEW V2 PAGE ── */
+.v2-page-content {
+  max-width: 1510px;
+  margin: 0 auto;
+  padding: var(--spacing-large);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-large);
+}
+
+.v2-filter-bar-inner {
+  max-width: 1510px;
+  margin: 0 auto;
+  padding: var(--spacing-small) var(--spacing-large);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-medium);
+  flex-wrap: wrap;
+}
+
 /* ── OVERVIEW GRID ── */
 .overview-grid {
   display: grid;
@@ -129,6 +149,60 @@ body {
   }
 }
 
+/* ── STAT CARDS ROW ── */
+.stat-cards-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-small);
+}
+
+@media (max-width: 768px) {
+  .page-header__inner {
+    padding: 0 var(--spacing-medium);
+  }
+
+  .header-search-text,
+  .header-search-shortcut {
+    display: none;
+  }
+
+  .header-search-btn {
+    padding: 8px !important;
+    gap: 0 !important;
+    border-radius: 50% !important;
+    width: 36px;
+    height: 36px;
+    justify-content: center;
+  }
+
+  .v2-page-content {
+    padding: var(--spacing-medium);
+    gap: var(--spacing-medium);
+  }
+
+  .v2-filter-bar-inner {
+    padding: var(--spacing-small) var(--spacing-medium);
+  }
+
+  .stat-cards-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-cards-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.v2-oversikt-desktop { display: block; }
+.v2-oversikt-mobile  { display: none; }
+
+@media (max-width: 1024px) {
+  .v2-oversikt-desktop { display: none; }
+  .v2-oversikt-mobile  { display: block; }
+}
+
 
 .summary-cards {
   display: grid;
@@ -136,24 +210,10 @@ body {
   gap: var(--spacing-small);
 }
 
-/* On small screens: horizontal scroll with fixed-width cards */
+/* On small screens: stack vertically */
 @media (max-width: 768px) {
   .summary-cards {
-    display: flex;
-    flex-direction: row;
-    overflow-x: auto;
-    gap: var(--spacing-small);
-    /* allow scroll past container edges */
-    margin-left: calc(-1 * var(--spacing-large));
-    margin-right: calc(-1 * var(--spacing-large));
-    padding-left: var(--spacing-large);
-    padding-right: var(--spacing-large);
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .summary-cards::-webkit-scrollbar { display: none; }
-  .summary-cards > * {
-    flex: 0 0 260px;
+    grid-template-columns: 1fr;
   }
 }
 

@@ -190,8 +190,8 @@ export default function Watchlist({ onStockClick }) {
             </P>
           </div>
         ) : (
-          <div style={{ overflowX: 'auto' }}>
-            <Table className="watchlist-table" style={{ tableLayout: 'fixed', width: '100%', minWidth: '600px' }}>
+          <Table.ScrollView>
+            <Table className="watchlist-table" style={{ tableLayout: 'fixed', width: '100%', minWidth: '720px' }}>
               <thead>
                 <Tr noWrap>
                   <Th>Aksje</Th>
@@ -237,7 +237,7 @@ export default function Watchlist({ onStockClick }) {
                 })}
               </tbody>
             </Table>
-          </div>
+          </Table.ScrollView>
         )}
       </Card>
 

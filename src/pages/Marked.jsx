@@ -267,6 +267,7 @@ function StockTable({ stocks, onStockClick }) {
 
 function StockTableEufemia({ stocks, onStockClick }) {
   return (
+    <Table.ScrollView>
     <Table border size="small" style={{ fontSize: '12px' }}>
       <thead>
         <tr>
@@ -301,6 +302,7 @@ function StockTableEufemia({ stocks, onStockClick }) {
         })}
       </tbody>
     </Table>
+    </Table.ScrollView>
   )
 }
 
@@ -373,6 +375,7 @@ const thLeft = { padding: '4px 8px' }
 
 function IndicesTableEufemia() {
   return (
+    <Table.ScrollView>
     <Table border size="small" style={{ fontSize: '12px' }}>
       <thead>
         <tr>
@@ -392,11 +395,13 @@ function IndicesTableEufemia() {
         ))}
       </tbody>
     </Table>
+    </Table.ScrollView>
   )
 }
 
 function CurrenciesTableEufemia() {
   return (
+    <Table.ScrollView>
     <Table border size="small" style={{ fontSize: '12px' }}>
       <thead>
         <tr>
@@ -415,11 +420,13 @@ function CurrenciesTableEufemia() {
         ))}
       </tbody>
     </Table>
+    </Table.ScrollView>
   )
 }
 
 function CommoditiesTableEufemia() {
   return (
+    <Table.ScrollView>
     <Table border size="small" style={{ fontSize: '12px' }}>
       <thead>
         <tr>
@@ -441,6 +448,7 @@ function CommoditiesTableEufemia() {
         ))}
       </tbody>
     </Table>
+    </Table.ScrollView>
   )
 }
 

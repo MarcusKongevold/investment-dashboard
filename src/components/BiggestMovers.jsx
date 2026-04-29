@@ -49,13 +49,12 @@ export default function BiggestMovers({ onStockClick }) {
             onChange={({ selectedKey }) => setActiveTab(selectedKey)}
           />
         </div>
-        <div style={{ overflowX: 'auto' }}>
+        <Table.ScrollView>
           <Table style={{ tableLayout: 'fixed', width: '100%', minWidth: '560px' }}>
             <thead>
               <Tr noWrap>
                 <Th>{activeTab === 'aksjer' ? 'Aksje' : 'Fond'}</Th>
                 <Th style={{ width: '180px' }} />
-                <Th style={{ width: '130px' }} />
                 <Th style={{ width: '150px' }}>Utvikling i dag</Th>
                 <Th style={{ width: '40px' }} />
               </Tr>
@@ -80,7 +79,6 @@ export default function BiggestMovers({ onStockClick }) {
                         <Button variant="secondary" size="small" style={{ margin: 0, color: 'var(--color-fire-red)' }}>Selg</Button>
                       </span>
                     </Td>
-                    <Td />
                     <Td style={{ paddingRight: 'var(--spacing-large)' }}>
                       <Tooltip targetElement={
                         <span style={{ display: 'flex', flexDirection: 'column', gap: '2px', alignItems: 'flex-start' }}>
@@ -104,7 +102,7 @@ export default function BiggestMovers({ onStockClick }) {
               })}
             </tbody>
           </Table>
-        </div>
+        </Table.ScrollView>
       </Card>
       <StockNewsDialog
         open={!!newsStock}

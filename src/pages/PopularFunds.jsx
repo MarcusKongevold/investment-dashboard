@@ -148,7 +148,7 @@ export default function PopularFunds({ onBack }) {
       {/* Table */}
       <div style={{ maxWidth: '1510px', margin: '0 auto', padding: 'var(--spacing-large)', display: 'flex', flexDirection: 'column', gap: 'var(--spacing-large)' }}>
         <div style={{ background: 'var(--color-white)', borderRadius: '8px', overflow: 'hidden', border: '1px solid var(--color-black-8)' }}>
-          <div style={{ overflowX: 'auto' }}>
+          <Table.ScrollView>
             <Table style={{ width: '100%', minWidth: '900px' }}>
               <thead>
                 <Tr noWrap>
@@ -198,7 +198,7 @@ export default function PopularFunds({ onBack }) {
                 ))}
               </tbody>
             </Table>
-          </div>
+          </Table.ScrollView>
         </div>
 
         {/* Andre investeringsmuligheter */}

@@ -23,7 +23,7 @@ const TABS = [
 ]
 
 export default function App() {
-  const [activeTab, setActiveTab] = useState('oversikt')
+  const [activeTab, setActiveTab] = useState('oversikt-v2')
   const [currentStock, setCurrentStock] = useState(null)
   const [currentView, setCurrentView] = useState(null)
   const [selectedAccount, setSelectedAccount] = useState('Alle kontoer')

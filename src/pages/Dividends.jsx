@@ -399,7 +399,7 @@ export default function Dividends() {
         {/* Dividend table */}
         <Card stack>
           <P top={false} bottom="small" style={{ fontWeight: 600 }}>Beholdning utbytteaksjer</P>
-          <div style={{ overflowX: 'auto' }}>
+          <Table.ScrollView>
             <Table size="medium" style={{ width: '100%', minWidth: '900px' }}>
               <caption className="dnb-sr-only">Utbytteaksjer</caption>
               <thead>
@@ -440,7 +440,7 @@ export default function Dividends() {
                 ))}
               </tbody>
             </Table>
-          </div>
+          </Table.ScrollView>
         </Card>
 
       </div>
